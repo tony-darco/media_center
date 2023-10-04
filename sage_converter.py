@@ -28,9 +28,6 @@ supported_video_exten = ["mp4"]
 supported_sound_exten = ["mp3"]
 
 def treat_image(media_dic):
-        print(media_dic)
-        print("this file is a image file")
-        
         if(media_dic.get("treatment") == "conversion"):
                 conversion_medium = "jpg"
                 if media_dic.get("fileExtension") == conversion_medium:
@@ -42,12 +39,13 @@ def treat_image(media_dic):
                 except:
                         print(f"Failed to convert the image from {media_dic.get('fileExtension')} to {conversion_medium}")
         elif (media_dic.get("treatment") == "Transcribe"):
+                print("Starting image Trans")
                 img = cv2.imread(media_dic.get("filePath"))
                 
                 text_in_image = pytesseract.image_to_string(img)
                 pdf_image = pytesseract.image_to_pdf_or_hocr(img)
                 
-                with open(f'{media_dic.get("fileSurname")}.pdf', 'w+b') as f:
+                with open(f'{OUTDIR}{media_dic.get("fileSurname")}.pdf', 'w+b') as f:
                         f.write(pdf_image)
                         
                 print(f"{text_in_image} is now available in as a pdf {media_dic.get('fileSurname')}.pdf")
@@ -92,7 +90,6 @@ def id_file(media_file,treatment):
                 "fileExtension": file_exten,
                 "treatment": treatment
         }
-        
         return(media_dic)
 
 def main():
@@ -106,7 +103,7 @@ def main():
         #transcribe the sound into text or print the text in the image
         media_file = input("which file would you like to work on? ")
         
-        treatment = input("What would you like to do with the file:\n1.Convert\n2.Transcribe\nChoose a number 1 or 2, 3(for both): ")
+        treatment = int(input("What would you like to do with the file:\n1.Convert\n2.Transcribe\nChoose a number 1 or 2, 3(for both): "))
         
         
         for media_file in file_instage:
