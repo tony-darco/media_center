@@ -23,21 +23,24 @@ treatment_options = {
 #       conversion
 #       transcribe
 
-supported_image_exten = ["jpg","png"]
+supported_image_exten =['JPG', 'PNG', 'BLP', 'BMP', 'WEBP', 'TIFF', 'TGA', 'SPIDER', 'SGI', 'PPM', 'MSP', 'JPEG', 'IM', 'ICO', 'ICNS', 'GIF', 'EPS', 'DIB', 'DDS']
 supported_video_exten = ["mp4"]
 supported_sound_exten = ["mp3"]
 
 def treat_image(media_dic):
-        if(media_dic.get("treatment") == "conversion"):
-                conversion_medium = "jpg"
+        if(media_dic.get("treatment") == "Conversion"):
+                conversion_medium = "TIFF"
                 if media_dic.get("fileExtension") == conversion_medium:
-                        conversion_medium = "png"
+                        conversion_medium = "PNG"
                 
                 try:
-                        with Image.open(media_dic.get("filePath")) as img:
-                                img.save(OUTDIR+media_dic.get("fileSurname")+"."+conversion_medium)
-                except:
-                        print(f"Failed to convert the image from {media_dic.get('fileExtension')} to {conversion_medium}")
+                                img = Image.open(media_dic.get("filePath")) 
+                                if (img.format) == (media_dic.get("fileExtension")):
+                                        img.save(OUTDIR+media_dic.get("fileSurname")+"."+conversion_medium)
+                                else:
+                                        print(img.format)
+                except Exception as e:
+                        print(f"Failed to convert the image from {media_dic.get('fileExtension')} to {conversion_medium}",e)
         elif (media_dic.get("treatment") == "Transcribe"):
                 print("Starting image Trans")
                 img = cv2.imread(media_dic.get("filePath"))
@@ -73,6 +76,8 @@ def treat_sound(media_dic):
 def id_file(media_file,treatment):
         file_name, file_exten = media_file.split('.')
         
+        file_exten = file_exten.upper()
+        
         if  file_exten in supported_image_exten:
                 media_type = "img"
         elif file_exten in supported_video_exten:
@@ -80,7 +85,7 @@ def id_file(media_file,treatment):
         elif file_exten in supported_sound_exten:
                 media_type = "mus"
         else:
-                return("failed")
+                return(f"failed to assign {media_file} to a type")
         
                         
         media_dic = {
