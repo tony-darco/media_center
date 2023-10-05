@@ -17,8 +17,8 @@ OUTDIR = "backstage/"
 #treatment options
 treatment_options = {
         1:"Conversion",
-        2:"Transcribe",
-        3:"both"
+        2:"Clean",
+        3:"Transcribe",
 }
 #       conversion
 #       transcribe
@@ -29,29 +29,35 @@ supported_sound_exten = ["mp3"]
 
 def treat_image(media_dic):
         if(media_dic.get("treatment") == "Conversion"):
+                
                 conversion_medium = "TIFF"
+                if conversion_medium in supported_image_exten:
+                        print(media_dic)
+                        pass
+                else:
+                        print("failed, requested file type is not supported")
+                        
+                
                 if media_dic.get("fileExtension") == conversion_medium:
                         conversion_medium = "PNG"
                 
                 try:
-                                img = Image.open(media_dic.get("filePath")) 
-                                if (img.format) == (media_dic.get("fileExtension")):
-                                        img.save(OUTDIR+media_dic.get("fileSurname")+"."+conversion_medium)
-                                else:
-                                        print(img.format)
+                        img = Image.open(media_dic.get("filePath")) 
+                        img.save(OUTDIR+media_dic.get("fileSurname")+"."+conversion_medium)
                 except Exception as e:
-                        print(f"Failed to convert the image from {media_dic.get('fileExtension')} to {conversion_medium}",e)
+                        return(f"Failed to convert the image from {media_dic.get('fileExtension')} to {conversion_medium}",e)
+                        
         elif (media_dic.get("treatment") == "Transcribe"):
-                print("Starting image Trans")
                 img = cv2.imread(media_dic.get("filePath"))
                 
                 text_in_image = pytesseract.image_to_string(img)
                 pdf_image = pytesseract.image_to_pdf_or_hocr(img)
                 
-                with open(f'{OUTDIR}{media_dic.get("fileSurname")}.pdf', 'w+b') as f:
-                        f.write(pdf_image)
-                        
-                print(f"{text_in_image} is now available in as a pdf {media_dic.get('fileSurname')}.pdf")
+                make_pdf = "yes"
+                if(make_pdf == "yes"):
+                        with open(f'{OUTDIR}{media_dic.get("fileSurname")}.pdf', 'w+b') as f:
+                                f.write(pdf_image)
+                        return(f"{text_in_image} is now available in as a pdf {media_dic.get('fileSurname')}.pdf")
                 
 
 def treat_video(media_dic):
@@ -70,7 +76,7 @@ def treat_sound(media_dic):
                 try:
                         AudioSegment.from_file(media_dic.get("filePath")).export(OUTDIR, format=conversion_medium)
                 except:
-                        print(f"Failed to convert the image from {media_dic.get('fileExtension')} to {conversion_medium}")
+                        return(f"Failed to convert the image from {media_dic.get('fileExtension')} to {conversion_medium}")
 
 
 def id_file(media_file,treatment):
@@ -90,44 +96,25 @@ def id_file(media_file,treatment):
                         
         media_dic = {
                 "type" : media_type,
-                "filePath" : "staging/"+media_file,
+                "filePath" : media_file,
                 "fileSurname" : file_name,
                 "fileExtension": file_exten,
                 "treatment": treatment
         }
         return(media_dic)
 
-def main():
-        #identify the file
-        #use a list of supported files
-        file_instage = os.listdir(INPUTDIR)
+def sage_start(media_file,treatment_op):
+        media_dic = id_file(media_file,treatment_op)
         
-        list_media_files = []
-        
-        #Ask the type of work that sage is meant to do
-        #transcribe the sound into text or print the text in the image
-        media_file = input("which file would you like to work on? ")
-        
-        treatment = int(input("What would you like to do with the file:\n1.Convert\n2.Transcribe\nChoose a number 1 or 2, 3(for both): "))
+        if (media_dic.get("type"))  == "img":
+                treat_image(media_dic) 
+        elif (media_dic.get("type"))  == "vid":
+                treat_video(media_dic)
+        elif (media_dic.get("type"))  == "mus":
+                treat_sound(media_dic)
         
         
-        for media_file in file_instage:
-                list_media_files.append(id_file(media_file,treatment_options.get(treatment)))
-                
-                
-        for i in range(len(list_media_files)):
-                
-                if (list_media_files[i].get("type"))  == "img":
-                        treat_image(list_media_files[i])
-                        
-                elif (list_media_files[i].get("type"))  == "vid":
-                        treat_video(list_media_files[i])
-                        
-                elif (list_media_files[i].get("type"))  == "mus":
-                        treat_sound(list_media_files[i])
-                        
-                
-        return
+        
 
-if __name__ == "__main__":
-        main()
+'''if __name__ == "__main__":
+        sage_start()'''

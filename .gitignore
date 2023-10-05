@@ -2,8 +2,8 @@
 backstage/
 testFiles/
 staging/
+old/
 
-*.html
 *.js
 *json
 *.css
