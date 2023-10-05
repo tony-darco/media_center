@@ -4,6 +4,8 @@ testFiles/
 staging/
 old/
 
+test*
+git
 *.js
 *json
 *.css
