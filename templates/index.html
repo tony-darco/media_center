@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
         <title>Sage Converter</title>
 </head>
 <body>
@@ -17,6 +18,15 @@
                 <div id="dropoff">
                         <form action="/upload" method = "post" enctype="multipart/form-data">
                                 <input type="file" name="file" />
+                                <select name="treatment" id="treatment_op" onchange="test()">
+                                        <option selected>Select</option>
+                                        <option value="Conversion">Convert</option>
+                                        <option value="Transcribe">Transcribe</option>
+                                        <option value="Clean">Back and forth</option>
+                                </select>
+                                <select name="convert_to" id="convert_to" disabled>
+                                        <option selected>Choose Format</option>
+                                </select>
                                 <input type="submit" value="Upload" id="">
                         </form>
                 <div>

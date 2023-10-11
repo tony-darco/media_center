@@ -12,7 +12,7 @@ config_file = open("supportedFiles.json")
 config_data = json.load(config_file)
 
 INPUTDIR = "staging/"
-OUTDIR = "backstage/"
+OUTDIR = "static/Image/"
 
 #treatment options
 treatment_options = {
@@ -30,9 +30,8 @@ supported_sound_exten = ["mp3"]
 def treat_image(media_dic):
         if(media_dic.get("treatment") == "Conversion"):
                 
-                conversion_medium = "TIFF"
+                conversion_medium = media_dic.get("OutputExtension")
                 if conversion_medium in supported_image_exten:
-                        print(media_dic)
                         pass
                 else:
                         print("failed, requested file type is not supported")
@@ -42,11 +41,12 @@ def treat_image(media_dic):
                         conversion_medium = "PNG"
                 
                 try:
+                        output_file = OUTDIR+media_dic.get("fileSurname")+"."+conversion_medium
                         img = Image.open(media_dic.get("filePath")) 
-                        img.save(OUTDIR+media_dic.get("fileSurname")+"."+conversion_medium)
+                        img.save(output_file)
+                        return(output_file)
                 except Exception as e:
                         return(f"Failed to convert the image from {media_dic.get('fileExtension')} to {conversion_medium}",e)
-                        
         elif (media_dic.get("treatment") == "Transcribe"):
                 img = cv2.imread(media_dic.get("filePath"))
                 
@@ -79,7 +79,7 @@ def treat_sound(media_dic):
                         return(f"Failed to convert the image from {media_dic.get('fileExtension')} to {conversion_medium}")
 
 
-def id_file(media_file,treatment):
+def id_file(media_file,form_data):
         file_name, file_exten = media_file.split('.')
         
         file_exten = file_exten.upper()
@@ -96,25 +96,27 @@ def id_file(media_file,treatment):
                         
         media_dic = {
                 "type" : media_type,
-                "filePath" : media_file,
+                "filePath" : INPUTDIR+media_file,
                 "fileSurname" : file_name,
                 "fileExtension": file_exten,
-                "treatment": treatment
+                "treatment": form_data["treatment"] ,#options Conversion Clean
+                "OutputExtension":  form_data["convert_to"]
         }
         return(media_dic)
 
-def sage_start(media_file,treatment_op):
-        media_dic = id_file(media_file,treatment_op)
+def sage_start(media_file,form_data):
+        
+        media_dic = id_file(media_file,form_data)
         
         if (media_dic.get("type"))  == "img":
-                treat_image(media_dic) 
+                #output_file_path = treat_image(media_dic) 
+                return(treat_image(media_dic) )
         elif (media_dic.get("type"))  == "vid":
-                treat_video(media_dic)
+                return(treat_video(media_dic))
         elif (media_dic.get("type"))  == "mus":
-                treat_sound(media_dic)
-        
-        
-        
+                return(treat_sound(media_dic))
+
+        #return(output_file_path)
 
 '''if __name__ == "__main__":
         sage_start()'''
