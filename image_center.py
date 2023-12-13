@@ -166,7 +166,7 @@ def id_file(media_file,form_data):
         }
         return(media_dic)
 
-def sage_start(media_file,form_data):
+def image_start(media_file,form_data):
     media_dic = id_file(media_file,form_data)
     
     if (media_dic["type"])  == "img" and (media_dic["treatment"] == "Conversion"):

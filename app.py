@@ -1,17 +1,12 @@
 from flask import *
 from fileinput import filename
 import os
-from sage_converter import sage_start
-import logging
+from image_center import image_start
 
 app = Flask(__name__)
 
 INPUTDIR = "staging/"
 OUTDIR = "backstage/"
-
-app.logger.setLevel(logging.INFO)
-handler = logging.FileHandler("app.log")
-app.logger.addHandler(handler)
 
 img = os.path.join('static','Image')
 
@@ -25,7 +20,7 @@ def upload():
         f  =request.files['file']
         f.save(INPUTDIR+f.filename)
         
-        image_file_path = sage_start(f.filename,request.form)
+        image_file_path = image_start(f.filename,request.form)
             
     return render_template("output.html", image_path = image_file_path)
 
