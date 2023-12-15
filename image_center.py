@@ -15,11 +15,6 @@ import speech_recognition as sr
 #files names has to be full path and has to be cut short to just the name and extension
 
 config_file = open("support.json")
-config_data = json.load(config_file)
-
-log_file = config_data["media_config"]["log_file"]
-
-logging.basicConfig(filename=log_file, filemode='w', format='%(asctime)s: %(levelname)s - %(message)s')
 
 INPUT_DIR = "staging/"
 OUTPUT_DIR = "static/Image/"
@@ -158,7 +153,7 @@ def id_file(media_file,form_data):
                         
         media_dic = {
                 "type" : media_type,
-                "filePath" : INPUTDIR+media_file,
+                "filePath" : INPUT_DIR+media_file,
                 "fileSurname" : file_name,
                 "fileExtension": file_exten,
                 "treatment": form_data["treatment"] ,#options Conversion Clean
