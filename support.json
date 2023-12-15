@@ -1,6 +1,6 @@
 {
     "media_config" : {
-        "log_file" : "error_log.txt",
+        "log_file" : "logs/log_images.log",
         "input_dir" : "staging/"
     },
 

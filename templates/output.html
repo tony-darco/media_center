@@ -8,5 +8,12 @@
 <body>
     <img src= "{{image_path}}" style="width: 100px;height: auto; " >
     <a href="{{image_path}}" download="computer">Download</a>
+    <button onclick="goBack()">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>
