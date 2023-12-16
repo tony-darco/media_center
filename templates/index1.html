@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mediaCenter.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+    <title>Sage Converter</title>
+</head>
+<body>
+    <div id="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <a class="navbar-brand" href="#">Media Center</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{{ url_for('home') }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Services
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{{ url_for('imageService') }}">Image Services</a>
+                    <a class="dropdown-item" href="#">Audio Services</a>
+                    <a class="dropdown-item" href="#">Video Services</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </nav>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Media Center</h1>
+                <p class="mb-3">Convert images from one format to another</p>
+                <p class="mb-3">Transcribe videos, get text from images and save images as pdf's where text can be copied </p>
+            </div>
+        </div>
+        <div id="dropoff">
+            <form action="/upload" method = "post" enctype="multipart/form-data">
+                <div class="input-group mb-3">
+                    <input type="submit" class="input-group-text" value="Upload" id="">
+                    <input type="file" class="form-control" name="file" />
+                </div>
+                <select name="treatment" id="treatment_op" onchange="test()">
+                    <option selected>Select</option>
+                    <option value="Conversion">Convert</option>
+                    <option value="Transcribe">Transcribe</option>
+                    <option value="Clean">Back and forth</option>
+                </select>
+                <select name="convert_to" id="convert_to" disabled>
+                    <option selected class="extenType">Choose Format</option>
+                </select>
+                            
+            </form>
+        </div>
+        <div id="support-content">
+            <div>
+                <h3>Supported File Formats</h3>
+                <dl>
+                    <dt>Supported Image Formats</dt>
+                        <dd>- JPEG, JPG, PNG, TIFF, BLP, BMP, WEBP...</dd>
+                    <dt>File Treatments</dt>
+                    <dt>- Converts</dt>
+                        <dd>-   Select file type to convert to</dd>
+                    <dt>- Transcribe</dt>
+                        <dd>-   Select to print out text in the image</dd>
+                    <dt>- Back and forth</dt>
+                        <dd>-   Select tp "clean" the file of potential errors/bug/vulnerabilities</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
