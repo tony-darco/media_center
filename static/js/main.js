@@ -3,6 +3,7 @@ function test(){
         console.log(treatment_op.value)
 
         var convert_to = document.getElementById("convert_to");
+        JSON.parse
         let image_ops = ["JPEG","JPG","PNG","TIFF"];
         convert_to.disabled = true;
 
