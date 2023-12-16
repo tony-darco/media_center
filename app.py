@@ -22,8 +22,24 @@ OUTPUT_DIR = "backstage/"
 img = os.path.join('static','Image')
 
 @app.route("/")
-def hello_world():
+def home():
     return render_template("index.html")
+
+@app.route("/media_center")
+def imageService():
+    return render_template("index1.html")
+
+@app.route("/image_center")
+def image_center():
+    return render_template("image_center.html")
+
+@app.route("/audio_center")
+def audio_center():
+    return render_template("audio_center.html")
+
+@app.route("/video_center")
+def video_center():
+    return render_template("video_center.html")
 
 @app.route("/upload", methods = ['GET','POST'])
 def upload():
