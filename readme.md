@@ -1,3 +1,7 @@
-This project is a culmination of my understanding of converting media files using different python libraries. 
-
 -incomplete
+
+#Image Center
+
+##About
+
+Image Center is an accumulation of my knowledge of different frameworks and libraries
