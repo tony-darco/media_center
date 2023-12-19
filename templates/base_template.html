@@ -12,9 +12,9 @@
     <title>Media Center - {% block title %} {% endblock%}</title>
 </head>
 <body>
-    <div id="container">
+    <div id="container" class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-            <a class="navbar-brand" href="#">{% block head %} {% endblock%}</a>
+            <a class="navbar-brand" href="#">Media Center</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -39,7 +39,7 @@
         </nav>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4">Media Center</h1>
+                <h1 class="display-4">{% block head%}{%endblock%}</h1>
                 <p class="mb-3">Convert images from one format to another</p>
                 <p class="mb-3">Transcribe videos, get text from images and save images as pdf's where text can be copied </p>
             </div>

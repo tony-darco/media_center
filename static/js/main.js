@@ -45,3 +45,14 @@ function getFileType(file) {
       
         return 'other';
       }
+
+$(document).ready(function(){
+    $(service_select).on("change", function(){
+        if(this.value == 'convert'){
+            $("#convert_select").show();
+        }
+        else{
+            $("#convert_select").hide();
+        }
+    });
+});
