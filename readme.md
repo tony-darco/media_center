@@ -1,3 +1,9 @@
+### TODO
+- [ ] Make Home page
+- [ ] Add instructions to each page
+- [ ] Create a support page
+
+
 # Image Center
 
 ## About
