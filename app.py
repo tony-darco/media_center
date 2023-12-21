@@ -11,7 +11,7 @@ logging.basicConfig(filename=log_file, level=logging.DEBUG,filemode='a', format=
 from flask import *
 from fileinput import filename
 import os
-import image_center
+from image_center import image_start
 
 app = Flask(__name__)
 
@@ -47,7 +47,7 @@ def upload():
         f  =request.files['file']
         f.save(INPUT_DIR+f.filename)
         
-        image_file_path = image_center.image_start(f.filename,request.form)
+        image_file_path = image_start(f.filename,request.form)
             
     return render_template("output.html", image_path = image_file_path)
 

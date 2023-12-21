@@ -45,7 +45,40 @@
             </div>
         </div>
         <div class="content container">
-            {% block content %} {% endblock %}
+            <form action="/upload" method = "POST" enctype="multipart/form-data" id="options-selected">
+                <div id="options" class="container">
+
+                    <div id="service-type">
+                        {% block serviceSelection %} {% endblock %}
+                        <div id="convert_div"style="display: none;">
+                            <br>
+                            <label style="width: 50%;">File type to convert to</label>
+                            <select id="convert_select" class="custom-select" name="convert_select">
+                                <option selected>Open this select</option>
+                            </select>
+                        </div>
+                        <div id="transcribe_div"style="display: none;">
+                            <br>
+                            <label style="width: 50%;">Select output type</label>
+                            <select id="transcribe_select" class="custom-select" name="transcribe_select">
+                                <option selected>Open this select</option>
+                            </select>
+                        </div>
+    
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div id="drag_drop" class="container d-flex flex-column justify-content-center">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="file" name="file">
+                        <label class="custom-file-label" for="file">Choose file</label>
+                    </div>
+                    {% block content %} {% endblock %}
+                    <br>
+                    <button type="submit" value="submit" class="btn btn-primary" id="submit" name="submit">Submit</button>
+                </div>
+            </form>
         </div>
 
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

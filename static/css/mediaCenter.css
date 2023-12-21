@@ -18,7 +18,18 @@ body {
 }
 
 #options{
-    height: 300px;
-    border: solid;
+    min-width: auto;
+    width: 55%;
 }
 
+#drag_drop{
+    min-width: auto;
+    width: 75%;
+}
+
+#convert_div{
+    width: 100%;
+    display: flex;
+    padding-left: 5%;
+    padding-right: 2%;
+}

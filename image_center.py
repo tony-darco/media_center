@@ -40,7 +40,7 @@ def convert_image(media_dic):
     Args:
         media_dic (dictionary): holds necessary the file information, from file name to file extension as keys
     """
-    if(media_dic["treatment"] == "Conversion"):
+    if(media_dic["treatment"] == "convert_image"):
         out_exten = media_dic["OutputExtension"]
         if out_exten not in supported_image_exten:
             logging.error("failed, requested file type is not supported")
@@ -71,7 +71,7 @@ def treat_video(media_dic):
         print("this file is a video file")
 
 def text_recognition_image(media_dic):
-    if (media_dic.get("treatment") == "Transcribe"):
+    if (media_dic.get("treatment") == "transcribe"):
         img = cv2.imread(media_dic["filePath"])
 
         try:
@@ -92,7 +92,7 @@ def text_recognition_image(media_dic):
                 logging.error(f"Failed to pdf image file {media_dic['fileSurname']}",exc_info=True)
 
 def convert_sound(media_dic):
-    if(media_dic["treatment"] == "conversion"):
+    if(media_dic["treatment"] == "convert_audio"):
         out_exten = media_dic["OutputExtension"]
         if out_exten not in supported_image_exten:
             logging.error("failed, requested file type is not supported")
@@ -104,7 +104,7 @@ def convert_sound(media_dic):
             logging.error(f"Failed to convert the image from {media_dic['fileExtension']} to {out_exten}")
 
 def text_recongiztion_audio(media_dic):
-    if (media_dic["treatment"] == "Transcribe"):
+    if (media_dic["treatment"] == "transcribe"):
         input_exten = media_dic["fileExtension"]
 
         if input_exten not in supported_sound_exten:
@@ -136,47 +136,55 @@ def text_recongiztion_audio(media_dic):
             logging.error(f"failed to read audio file")
 
 
-def id_file(media_file,form_data):
-        file_name, file_exten = media_file.split('.')
-        
-        file_exten = file_exten.upper()
-        
-        if  file_exten in supported_image_exten:
-                media_type = "img"
-        elif file_exten in supported_video_exten:
-                media_type = "vid"
-        elif file_exten in supported_sound_exten:
-                media_type = "mus"
-        else:
-                return(f"failed to assign {media_file} to a type")
-        
-                        
-        media_dic = {
-                "type" : media_type,
-                "filePath" : INPUT_DIR+media_file,
-                "fileSurname" : file_name,
-                "fileExtension": file_exten,
-                "treatment": form_data["treatment"] ,#options Conversion Clean
-                "OutputExtension":  form_data["convert_to"]
-        }
-        return(media_dic)
+def id_file(media_file, service_type, out_extension, type_transcribe):
+    file_name, file_exten = media_file.split('.')
+    
+    file_exten = file_exten.upper()
+    
+    if  file_exten in supported_image_exten:
+        media_type = "img"
+    elif file_exten in supported_video_exten:
+        media_type = "vid"
+    elif file_exten in supported_sound_exten:
+        media_type = "mus"
+    else:
+        return(f"failed to assign {media_file} to a type")
+    
+    
+    media_dic = {
+        "type" : media_type,
+        "filePath" : INPUT_DIR+media_file,
+        "fileSurname" : file_name,
+        "fileExtension": file_exten,
+        "treatment": service_type ,#options Conversion Clean
+        "OutputExtension":  out_extension,
+        "type_transcribe" : type_transcribe
+    }
+    return(media_dic)
 
 def image_start(media_file,form_data):
-    media_dic = id_file(media_file,form_data)
-    
-    if (media_dic["type"])  == "img" and (media_dic["treatment"] == "Conversion"):
+    service_type = form_data["service_select"]
+    out_extension = form_data["convert_select"]
+    type_transcribe = form_data["transcribe_select"]
+
+    media_dic = id_file(media_file,service_type,out_extension,type_transcribe)
+    print(service_type,media_dic["type"])
+    if (media_dic["type"])  == "img" and (service_type == "convert_image"):
         #output_file_path = treat_image(media_dic) 
         return(convert_image(media_dic) )
-    elif (media_dic["type"])  == "img" and (media_dic["treatment"] == "Transcribe"):
+    elif (media_dic["type"])  == "img" and (service_type == "transcribe"):
         return(text_recognition_image(media_dic))
 
-    elif (media_dic.get("type"))  == "vid" and (media_dic["treatment"] == "Conversion"):
+    elif (media_dic.get("type"))  == "vid" and (service_type == "convert_video"):
         return(convert_video(media_dic))
 
-    elif (media_dic.get("type"))  == "mus" and (media_dic["treatment"] == "Conversion"):
+    elif (media_dic.get("type"))  == "mus" and (service_type == "convert_audio"):
         return(convert_sound(media_dic))
-    elif (media_dic.get("type"))  == "mus" and (media_dic["treatment"] == "Transcribe"):
+    elif (media_dic.get("type"))  == "mus" and (service_type == "transcribe"):
         return(text_recongiztion_audio(media_dic))
+    else:
+        logging.error("couldn't find type")
+        return("failed")
 
 '''if __name__ == "__main__":
         sage_start()'''
