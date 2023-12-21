@@ -1,5 +1,3 @@
--incomplete
-
 #Image Center
 
 ##About
