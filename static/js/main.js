@@ -73,11 +73,11 @@ $(document).ready(function(){
             })
         }
         else if(this.value == 'transcribe'){
-            $("#tanscribe_div").show();
+            $("#transcribe_div").show();
             $(function(){
                 var data = ["Text File","Text on web page"]
                 $.each(data,function(i, option){
-                    $("#tanscribe_select").append($('<option/>').attr("value", option).text(option));
+                    $("#transcribe_select").append($('<option/>').attr("value", option).text(option));
                 })
             })
         }

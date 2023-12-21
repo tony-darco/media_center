@@ -1,15 +1,20 @@
-{%extends 'base_template.html'%}
+{%extends 'service_base.html'%}
 {% block title %}Audio{% endblock %}
 
-{% block serviceSelection %}
-    <select id="service_select" class="custom-select">
-        <option selected>Open this select</option>
-        <option value="convert_audio">Convert</option>
-        <option value="transcribe_image">Transcribe</option>
-        <option value="shake_image">Shake</option>
-    </select>
+{% block head %}
+Audio Services
 {% endblock %}
 
-{% block content %}
-Audio
+{% block description %} 
+    <p class="mb-3">Speech to  text, and convert audio formats</p>
+{% endblock %}
+
+{% block serviceSelection %}
+    <label for="service_select">Select a service</label>
+    <select id="service_select" class="custom-select" name="service_select">
+        <option selected>Open this select</option>
+        <option value="convert_audio">Convert</option>
+        <option value="transcribe">Transcribe</option>
+        <option value="shake_image">Shake</option>
+    </select>
 {% endblock %}

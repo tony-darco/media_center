@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>output</title>
-</head>
-<body>
-    <img src= "{{image_path}}" style="width: 100px;height: auto; " >
-    <a href="{{image_path}}" download="computer">Download</a>
-    <button onclick="goBack()">Go Back</button>
+{%extends "base_template.html"%}
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-</body>
-</html>
+{% block title %}Audio{% endblock %}
+
+{%block body_content%}
+
+<div class="container">
+    <img src="{{image_path}}" class="img-thumbnail" alt="Responsive image">
+    <a href="{{image_path}}" download="computer" class="btn btn-primary">Download</a>
+</div>
+
+
+{%endblock%}

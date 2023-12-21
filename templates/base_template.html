@@ -28,7 +28,6 @@
                     Services
                   </a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ url_for('imageService') }}">old_Sage</a>
                     <a class="dropdown-item" href="{{ url_for('image_center') }}">Image Services</a>
                     <a class="dropdown-item" href="{{ url_for('audio_center') }}">Audio Services</a>
                     <a class="dropdown-item" href="{{ url_for('video_center') }}">Video Services</a>
@@ -37,49 +36,8 @@
               </ul>
             </div>
         </nav>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">{% block head%}{%endblock%}</h1>
-                <p class="mb-3">Convert images from one format to another</p>
-                <p class="mb-3">Transcribe videos, get text from images and save images as pdf's where text can be copied </p>
-            </div>
-        </div>
-        <div class="content container">
-            <form action="/upload" method = "POST" enctype="multipart/form-data" id="options-selected">
-                <div id="options" class="container">
 
-                    <div id="service-type">
-                        {% block serviceSelection %} {% endblock %}
-                        <div id="convert_div"style="display: none;">
-                            <br>
-                            <label style="width: 50%;">File type to convert to</label>
-                            <select id="convert_select" class="custom-select" name="convert_select">
-                                <option selected>Open this select</option>
-                            </select>
-                        </div>
-                        <div id="transcribe_div"style="display: none;">
-                            <br>
-                            <label style="width: 50%;">Select output type</label>
-                            <select id="transcribe_select" class="custom-select" name="transcribe_select">
-                                <option selected>Open this select</option>
-                            </select>
-                        </div>
-    
-                    </div>
-                </div>
-                <br>
-                <br>
-                <div id="drag_drop" class="container d-flex flex-column justify-content-center">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="file" name="file">
-                        <label class="custom-file-label" for="file">Choose file</label>
-                    </div>
-                    {% block content %} {% endblock %}
-                    <br>
-                    <button type="submit" value="submit" class="btn btn-primary" id="submit" name="submit">Submit</button>
-                </div>
-            </form>
-        </div>
+        {% block body_content %} {%endblock%}
 
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
             <p class="col-md-4 mb-0 text-muted">© 2023 built by Tony Darco</p>
@@ -88,9 +46,8 @@
               <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             </a>
         
-            <ul class="nav col-md-4 justify-content-end">
+            <ul class="nav col-md-3 justify-content-end">
               <li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link px-2 text-muted">Home</a></li>
-              <li class="nav-item"><a href="{{ url_for('imageService') }}" class="nav-link px-2 text-muted">old_Sage</a></li>
               <li class="nav-item"><a href="{{ url_for('image_center') }}" class="nav-link px-2 text-muted">Image Services</a></li>
               <li class="nav-item"><a href="{{ url_for('audio_center') }}" class="nav-link px-2 text-muted">Audio Services</a></li>
               <li class="nav-item"><a href="{{ url_for('video_center') }}" class="nav-link px-2 text-muted">Video Services</a></li>

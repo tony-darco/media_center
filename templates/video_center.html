@@ -1,10 +1,20 @@
-{%extends 'base_template.html'%}
+{%extends 'service_base.html'%}
 {% block title %}Video{% endblock %}
 
 {% block head %}
 Video Services
 {% endblock %}
 
-{% block content %}
+{% block description %} 
+    <p class="mb-3">Text recognition, and convert video formats</p>
+{% endblock %}
 
+{% block serviceSelection %}
+    <label for="service_select">Select a service</label>
+    <select id="service_select" class="custom-select" name="service_select">
+        <option selected>Open this select a Service</option>
+        <option value="convert_video">Convert</option>
+        <option value="transcribe">Transcribe</option>
+        <option value="shake">Shake</option>
+    </select>
 {% endblock %}
