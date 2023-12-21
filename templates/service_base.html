@@ -1,12 +1,7 @@
 {%extends 'base_template.html'%}
 
 {% block body_content %}
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">{% block head%}{%endblock%}</h1>
-            {% block description %} {% endblock %}
-        </div>
-    </div>
+
     <div class="content container">
         <form action="/upload" method = "POST" enctype="multipart/form-data" id="options-selected">
             <div id="options" class="container">

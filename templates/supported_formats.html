@@ -1,0 +1,26 @@
+{%extends "base_template.html"%}
+
+{% block head %}
+Supported file formats
+{% endblock %}
+
+{% block description %} 
+    <p class="mb-3">Search list of Supported File Types</p>
+{% endblock %}
+
+{% block body_content %} 
+<div class="container d-flex flex-column">
+    <br>
+    <div class="input-group" >
+        <div class="form-outline w-75 mx-auto" data-mdb-input-init >
+            <input type="text" name="search" id="myInput" class="form-control" placeholder="Search for file format.." onkeyup="search_function()"/>
+        </div>
+    </div>
+    <br>
+    <ul id="list_of_formats" class="mx-auto">
+        {% for list_item in supported_types%}
+        <li class="supported_class">{{list_item}}</li>
+        {%endfor%}
+    </ul>
+</div>
+{%endblock%}

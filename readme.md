@@ -8,6 +8,7 @@
 - Flask
 - BootStrap
 - Google Tessaract
+- FFmpeg
 
 Image Center is a webpage that allows user to submit files and request specific services. These services are file format conversions, speech/text recognition and shake.
 
@@ -35,9 +36,18 @@ Image Center is a webpage that allows user to submit files and request specific 
 - DDS
 ### Supported Video Conversion formats
 - MP4
-- WAV
 ### Supported Audio Conversion formats
-- mp3
+- MP3
+- WAV
+- ACC
+- FLAC
+- OGG
+- All ffmpeg formats
 
 ### Supported Text Recognition formats
 ### Supported Speech Recognition formats
+- WAV (PCM/LPCM)
+- AIFF
+- AIFF-C
+- FLAC
+- All ffmpeg formats are supported by converting to the above formats and back 

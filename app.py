@@ -5,6 +5,7 @@ config_file = open("support.json")
 config_data = json.load(config_file)
 
 log_file = config_data["media_config"]["log_file"]
+file_types_list = config_data["media_config"]["file_types_list"]
 
 logging.basicConfig(filename=log_file, level=logging.DEBUG,filemode='a', format='%(asctime)s: %(levelname)s - %(message)s')
 
@@ -24,6 +25,15 @@ img = os.path.join('static','Image')
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/supported_formats")
+def supported_formats():
+    list_of_support = []
+    with open(file_types_list, "r") as file_support:
+        lines = file_support.readlines()
+        for i in lines:
+            list_of_support.append(i)
+    return render_template("supported_formats.html",supported_types=list_of_support)
 
 @app.route("/media_center")
 def imageService():
