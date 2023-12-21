@@ -31,7 +31,6 @@ function test(){
 }
 
 function getFileType(file) {
-
         if(file.type.match('image.*'))
           return 'image';
       
@@ -48,11 +47,43 @@ function getFileType(file) {
 
 $(document).ready(function(){
     $(service_select).on("change", function(){
-        if(this.value == 'convert'){
-            $("#convert_select").show();
+        if(this.value == 'convert_image'){
+            $("#convert_div").show();
+            $(function(){
+                var data = ["JPG", "PNG", "BLP", "BMP", "WEBP", "TIFF", "TGA", "SPIDER", "SGI", "PPM", "MSP", "JPEG", "IM", "ICO", "ICNS", "GIF", "EPS", "DIB", "DDS"];
+                $.each(data,function(i, option){
+                    $("#convert_select").append($('<option/>').attr("value", option).text(option));
+                })
+            })
+        }else if(this.value == 'convert_audio'){
+            $("#convert_div").show();
+            $(function(){
+                var data = ["MP3"]
+                $.each(data,function(i, option){
+                    $("#convert_select").append($('<option/>').attr("value", option).text(option));
+                })
+            })
+        }else if(this.value == 'convert_video'){
+            $("#convert_div").show();
+            $(function(){
+                var data = ["MP4","WAV"]
+                $.each(data,function(i, option){
+                    $("#convert_select").append($('<option/>').attr("value", option).text(option));
+                })
+            })
+        }
+        else if(this.value == 'transcribe'){
+            $("#tanscribe_div").show();
+            $(function(){
+                var data = ["Text File","Text on web page"]
+                $.each(data,function(i, option){
+                    $("#tanscribe_select").append($('<option/>').attr("value", option).text(option));
+                })
+            })
         }
         else{
-            $("#convert_select").hide();
+            $("#convert_div").hide();
         }
     });
 });
+
