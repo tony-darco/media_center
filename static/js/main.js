@@ -47,6 +47,8 @@ function getFileType(file) {
 
 $(document).ready(function(){
     $(service_select).on("change", function(){
+        $("#convert_div").hide();
+        $("#transcribe_div").hide();
         if(this.value == 'convert_image'){
             $("#convert_div").show();
             $(function(){
