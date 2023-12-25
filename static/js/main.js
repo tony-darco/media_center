@@ -49,42 +49,52 @@ $(document).ready(function(){
     $(service_select).on("change", function(){
         $("#convert_div").hide();
         $("#transcribe_div").hide();
+
+        function check(id){
+            return(document.getElementById(id).length <= 1)
+        }
+
         if(this.value == 'convert_image'){
             $("#convert_div").show();
             $(function(){
                 var data = ["JPG", "PNG", "BLP", "BMP", "WEBP", "TIFF", "TGA", "SPIDER", "SGI", "PPM", "MSP", "JPEG", "IM", "ICO", "ICNS", "GIF", "EPS", "DIB", "DDS"];
-                $.each(data,function(i, option){
-                    $("#convert_select").append($('<option/>').attr("value", option).text(option));
-                })
+                if (check("convert_select")){
+                    $.each(data,function(i, option){
+                        $("#convert_select").append($('<option/>').attr("value", option).text(option));
+                    })
+                }
             })
         }else if(this.value == 'convert_audio'){
             $("#convert_div").show();
             $(function(){
                 var data = ["MP3"]
-                $.each(data,function(i, option){
-                    $("#convert_select").append($('<option/>').attr("value", option).text(option));
-                })
+                if (check("convert_select")){
+                    $.each(data,function(i, option){
+                        $("#convert_select").append($('<option/>').attr("value", option).text(option));
+                    })
+                }
             })
         }else if(this.value == 'convert_video'){
             $("#convert_div").show();
             $(function(){
                 var data = ["MP4","WAV"]
-                $.each(data,function(i, option){
-                    $("#convert_select").append($('<option/>').attr("value", option).text(option));
-                })
+                if (check("convert_select")){
+                    $.each(data,function(i, option){
+                        $("#convert_select").append($('<option/>').attr("value", option).text(option));
+                    })
+                }
             })
         }
         else if(this.value == 'transcribe'){
             $("#transcribe_div").show();
             $(function(){
                 var data = ["Text File","Text on web page"]
-                $.each(data,function(i, option){
-                    $("#transcribe_select").append($('<option/>').attr("value", option).text(option));
-                })
+                if (check("transcribe_select")){
+                    $.each(data,function(i, option){
+                        $("#transcribe_select").append($('<option/>').attr("value", option).text(option));
+                    })
+                }
             })
-        }
-        else{
-            $("#convert_div").hide();
         }
     });
 });
