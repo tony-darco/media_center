@@ -26,14 +26,14 @@ img = os.path.join('static','Image')
 def home():
     return render_template("index.html")
 
-@app.route("/supported_formats")
-def supported_formats():
+@app.route("/formats")
+def formats():
     list_of_support = []
     with open(file_types_list, "r") as file_support:
         lines = file_support.readlines()
         for i in lines:
             list_of_support.append(i)
-    return render_template("supported_formats.html",supported_types=list_of_support)
+    return render_template("formats.html",supported_types=list_of_support)
 
 @app.route("/media_center")
 def imageService():
