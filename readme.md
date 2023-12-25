@@ -2,7 +2,7 @@
 - [ ] Make Home page
 - [ ] Add instructions to each page
 - [ ] Create a support page
-- [ ] create error page
+- [X] create error page
 
 
 
