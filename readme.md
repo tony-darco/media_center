@@ -1,5 +1,5 @@
 ### TODO
-- [ ] Make Home page
+- [X] Make Home page
 - [ ] Add instructions to each page
 - [ ] Create a support page
 - [X] create error page
