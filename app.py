@@ -49,15 +49,15 @@ def imageService():
 
 @app.route("/image_center")
 def image_center():
-    return render_template("image_center.html")
+    return render_template("image_center.html", title = "Image")
 
 @app.route("/audio_center")
 def audio_center():
-    return render_template("audio_center.html")
+    return render_template("audio_center.html", title = "Audio")
 
 @app.route("/video_center")
 def video_center():
-    return render_template("video_center.html")
+    return render_template("video_center.html", title = "Video")
 
 @app.route("/upload", methods = ['GET','POST'])
 def upload():
