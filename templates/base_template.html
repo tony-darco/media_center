@@ -14,7 +14,7 @@
 <body>
     <div id="container" class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-            <a class="navbar-brand" href="#">Media Center</a>
+            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='head.ICO')}}" width="30" height="30" class="d-inline-block align-top" alt="">Media Center</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,13 +36,7 @@
               </ul>
             </div>
         </nav>
-
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">{% block head%}{%endblock%}</h1>
-                {% block description %} {% endblock %}
-            </div>
-        </div>
+        <br>
 
         {% block body_content %} {%endblock%}
 
