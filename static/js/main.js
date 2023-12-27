@@ -46,6 +46,13 @@ function getFileType(file) {
       }
 
 $(document).ready(function(){
+
+    document.querySelector('.custom-file-input').addEventListener('change',function(e){
+        var fileName = document.getElementById("file").files[0].name;
+        var nextSibling = e.target.nextElementSibling
+        nextSibling.innerText = fileName
+      })
+
     $(service_select).on("change", function(){
         $("#convert_div").hide();
         $("#transcribe_div").hide();
