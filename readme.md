@@ -1,12 +1,3 @@
-### TODO
-- [X] Make Home page
-- [ ] Add instructions to each page
-- [ ] Create a support page
-- [X] create error page
-- [ ] create support for video files
-
-
-
 # Image Center
 
 ## About
