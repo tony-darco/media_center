@@ -9,7 +9,7 @@
 # Image Center
 
 ## About
-### Image Center is a personal project by Tony Darco to showcase his abilities with the following languages, frameworks, and technologies
+### Image Center is a Flask app that allows user to submit files and request specific services such as file format conversions, speech/text recognition and shake. Image Center is a personal project showcase abilities with the languages, frameworks, and technologies such as
 
 - Python
 - HTML/CSS/JS
@@ -17,8 +17,6 @@
 - BootStrap
 - Google Tessaract
 - FFmpeg
-
-Image Center is a webpage that allows user to submit files and request specific services. These services are file format conversions, speech/text recognition and shake.
 
 ## Supported Formats
 
